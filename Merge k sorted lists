@@ -1,0 +1,27 @@
+class Solution {
+    public ListNode mergeKLists(ListNode[] lists) {
+        if(lists.length == 0)
+            return null;
+
+        ListNode head=new ListNode(0);
+        ListNode headPointer=head;
+
+        PriorityQueue<Integer> minHeap=new PriorityQueue<>();
+
+        //add everything to a minheap
+        for(ListNode list:lists){
+            while(list != null){
+                minHeap.offer(list.val);
+                list=list.next;
+            }
+        }
+
+        //take every element back from minheap and make a list
+        while (!minHeap.isEmpty()){
+            head.next=new ListNode(minHeap.poll());
+            head=head.next;
+        }
+
+        return headPointer.next;
+    }
+}
