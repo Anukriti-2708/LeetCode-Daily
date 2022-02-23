@@ -1,0 +1,17 @@
+class Solution {
+    public Node cloneGraph(Node node) {
+        if (node == null) return null; 
+        Map <Integer, Node>m = new HashMap<>();
+        return clone(node, m);
+        }
+    
+    public Node clone(Node node , Map<Integer, Node> m){
+        if(m.containsKey(node.val)) return m.get(node.val);
+        Node copy = new Node(node.val);
+        m.put(node.val, copy);
+        for(Node neighbor : node.neighbors){
+            copy.neighbors.add(clone(neighbor, m));
+        }
+        return copy;
+    }
+}
